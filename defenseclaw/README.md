@@ -1,54 +1,26 @@
-# DefenseClaw — Security Scanning for OpenClaw
+# DefenseClaw — Security Governance for OpenClaw Agents
 
 > 📺 Video: [Your AI Agent Has a Massive Security Problem (Here's the Fix)](https://youtube.com/@Jason_Cyr)
 
-DefenseClaw is an independent, two-layer security system that sits between the outside world and your AI agent. It scans every inbound and outbound message for threats — prompt injection, PII leaks, exposed secrets, SQL injection, malware indicators — and blocks or redacts them before they reach (or leave) your agent.
+[DefenseClaw](https://github.com/cisco-ai-defense/defenseclaw) is an open-source security governance layer for [OpenClaw](https://github.com/nvidia/openclaw) AI agents. It scans every skill, MCP server, plugin, and tool call before allowing it to run — and blocks anything dangerous automatically.
 
-## What It Catches
+Built by the [Cisco AI Defense](https://www.cisco.com/site/us/en/products/security/ai-defense/index.html) team.
 
-- **Prompt Injection** — Pattern matching, structural analysis, Unicode evasion detection
-- **PII** — Credit cards (Luhn validated), SSNs, emails, phone numbers, IPs, passports, and more
-- **Secrets** — API keys for AWS, GCP, Azure, GitHub, Slack, Stripe, and 7+ other providers
-- **Vulnerabilities** — SQLi, SSRF, path traversal, command injection, XSS
-- **Malware Indicators** — Binary magic bytes, reverse shells, cryptominers, high-entropy payloads
+## What It Does
 
-Plus an egress firewall (Layer 2) that controls which domains your agent can reach — deny-by-default.
+- **Skill Scanning** — Scans every OpenClaw skill before it runs. HIGH/CRITICAL findings are auto-blocked.
+- **MCP Server Scanning** — Inspects MCP servers for injection, data exfiltration, and unsafe patterns.
+- **CodeGuard** — Static analysis engine that catches hardcoded credentials, dangerous execution, SQL injection, path traversal, and more in agent-generated code.
+- **LLM Guardrail** — Proxy that inspects every prompt and completion for secrets, PII, and injection attacks.
+- **Tool Inspection** — Every tool call passes through the inspect engine before execution, checking for secrets, dangerous commands, sensitive paths, C2 patterns, cognitive file tampering, and prompt injection.
+- **Audit & SIEM** — SQLite audit store with Splunk forwarding, OTEL export, and full compliance trail.
 
 ## The Prompt
 
-The prompt below is what I gave my AI agent (Gibson) to build DefenseClaw from scratch. It produced the full working system: Go scanner binary, OpenClaw plugin, egress firewall, policy engine, audit logging, and test suite.
+The prompt below will get a coding agent (Claude Code, Codex, etc.) to install DefenseClaw on your OpenClaw setup. It checks dependencies, installs everything, and verifies it's working.
 
 👉 **[PROMPT.md](./PROMPT.md)**
 
 ## The Code
 
-The full open-source DefenseClaw codebase is here:
-
-👉 **[github.com/Jason-Cyr/OpenClawSecurity](https://github.com/Jason-Cyr/OpenClawSecurity)**
-
-## Setup
-
-After cloning the DefenseClaw repo, the basic setup is:
-
-```bash
-# Build
-cd OpenClawSecurity
-make build
-
-# Install the OpenClaw plugin
-make install-plugin
-
-# Configure (add to ~/.openclaw/openclaw.json)
-# See the full README in the DefenseClaw repo for config details
-
-# Restart OpenClaw
-openclaw gateway restart
-```
-
-## Policy Configuration
-
-DefenseClaw uses YAML policy files. Here's the production policy I run:
-
-👉 **[production-policy.yaml](./production-policy.yaml)** — Block injection/secrets/vulns/malware, redact PII, domain allowlist enforced.
-
-You'll want to customize the `domains` list for your own setup (which APIs does your agent need to reach?).
+👉 **[github.com/cisco-ai-defense/defenseclaw](https://github.com/cisco-ai-defense/defenseclaw)**

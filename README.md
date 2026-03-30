@@ -8,7 +8,7 @@ These are the actual prompts and configurations I use in my day-to-day setup —
 
 | Folder | What | Description |
 |--------|------|-------------|
-| [`defenseclaw/`](./defenseclaw/) | 🛡️ Security Setup | The DefenseClaw security layer prompt — scan every message for injection, PII, secrets, and more |
+| [`defenseclaw/`](./defenseclaw/) | 🛡️ Security Governance | Install [DefenseClaw](https://github.com/cisco-ai-defense/defenseclaw) — scan skills, MCP servers, tool calls, and LLM traffic for threats |
 | [`agent-setup/`](./agent-setup/) | 🤖 Agent Identity | AGENTS.md, SOUL.md, and USER.md templates for giving your agent memory and personality |
 | [`skills/`](./skills/) | 🧰 OpenClaw Skills | Drop-in skill files for specific capabilities |
 | [`workflows/`](./workflows/) | 🔄 Workflows | Multi-step agent workflows (daily notes, content pipelines, task management) |
