@@ -1,4 +1,4 @@
-# ClawShield Production Policy
+# DefenseClaw Production Policy
 #
 # Default: ALLOW — scanners detect real threats
 # Clean messages pass through; threats are blocked by scanner findings

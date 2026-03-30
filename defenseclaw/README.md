@@ -2,7 +2,7 @@
 
 > 📺 Video: [Your AI Agent Has a Massive Security Problem (Here's the Fix)](https://youtube.com/@Jason_Cyr)
 
-ClawShield is an independent, two-layer security system that sits between the outside world and your AI agent. It scans every inbound and outbound message for threats — prompt injection, PII leaks, exposed secrets, SQL injection, malware indicators — and blocks or redacts them before they reach (or leave) your agent.
+DefenseClaw is an independent, two-layer security system that sits between the outside world and your AI agent. It scans every inbound and outbound message for threats — prompt injection, PII leaks, exposed secrets, SQL injection, malware indicators — and blocks or redacts them before they reach (or leave) your agent.
 
 ## What It Catches
 
@@ -16,19 +16,19 @@ Plus an egress firewall (Layer 2) that controls which domains your agent can rea
 
 ## The Prompt
 
-The prompt below is what I gave my AI agent (Gibson) to build ClawShield from scratch. It produced the full working system: Go scanner binary, OpenClaw plugin, egress firewall, policy engine, audit logging, and test suite.
+The prompt below is what I gave my AI agent (Gibson) to build DefenseClaw from scratch. It produced the full working system: Go scanner binary, OpenClaw plugin, egress firewall, policy engine, audit logging, and test suite.
 
 👉 **[PROMPT.md](./PROMPT.md)**
 
 ## The Code
 
-The full open-source ClawShield codebase is here:
+The full open-source DefenseClaw codebase is here:
 
 👉 **[github.com/Jason-Cyr/OpenClawSecurity](https://github.com/Jason-Cyr/OpenClawSecurity)**
 
 ## Setup
 
-After cloning the ClawShield repo, the basic setup is:
+After cloning the DefenseClaw repo, the basic setup is:
 
 ```bash
 # Build
@@ -39,7 +39,7 @@ make build
 make install-plugin
 
 # Configure (add to ~/.openclaw/openclaw.json)
-# See the full README in the ClawShield repo for config details
+# See the full README in the DefenseClaw repo for config details
 
 # Restart OpenClaw
 openclaw gateway restart
@@ -47,7 +47,7 @@ openclaw gateway restart
 
 ## Policy Configuration
 
-ClawShield uses YAML policy files. Here's the production policy I run:
+DefenseClaw uses YAML policy files. Here's the production policy I run:
 
 👉 **[production-policy.yaml](./production-policy.yaml)** — Block injection/secrets/vulns/malware, redact PII, domain allowlist enforced.
 

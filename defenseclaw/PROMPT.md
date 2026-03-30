@@ -1,12 +1,12 @@
-# DefenseClaw — Install ClawShield on Your OpenClaw Agent
+# DefenseClaw — Install DefenseClaw on Your OpenClaw Agent
 
-This prompt will set up [ClawShield](https://github.com/Jason-Cyr/OpenClawSecurity) — an independent security layer that scans every message flowing in and out of your OpenClaw agent for threats like prompt injection, PII leaks, exposed API keys, and more.
+This prompt will set up [DefenseClaw](https://github.com/Jason-Cyr/OpenClawSecurity) — an independent security layer that scans every message flowing in and out of your OpenClaw agent for threats like prompt injection, PII leaks, exposed API keys, and more.
 
 ## Before You Start
 
 **⚠️ Important: Do NOT give this prompt to OpenClaw itself.**
 
-Use [Claude Code](https://docs.anthropic.com/en/docs/claude-code), [Codex](https://openai.com/index/codex/), or any external coding agent to run this install. Here's why: ClawShield modifies OpenClaw's configuration and restarts the gateway. If something goes wrong during install, OpenClaw can't start — and if it can't start, it can't debug itself. You'd be stuck. An external coding agent can troubleshoot and fix things even when OpenClaw is down.
+Use [Claude Code](https://docs.anthropic.com/en/docs/claude-code), [Codex](https://openai.com/index/codex/), or any external coding agent to run this install. Here's why: DefenseClaw modifies OpenClaw's configuration and restarts the gateway. If something goes wrong during install, OpenClaw can't start — and if it can't start, it can't debug itself. You'd be stuck. An external coding agent can troubleshoot and fix things even when OpenClaw is down.
 
 ## What You'll Need
 
@@ -24,7 +24,7 @@ Copy everything below and paste it into your coding agent (Claude Code, Codex, e
 ---
 
 ```
-I need you to install ClawShield, an independent security scanning layer for
+I need you to install DefenseClaw, an independent security scanning layer for
 OpenClaw. Follow these steps carefully and in order. Stop and tell me if
 anything fails — don't try to work around errors silently.
 
@@ -40,7 +40,7 @@ Do not proceed without all three.
 
 STEP 2 — CLONE THE REPO
 
-Clone the ClawShield repository:
+Clone the DefenseClaw repository:
 
   git clone https://github.com/Jason-Cyr/OpenClawSecurity.git
   cd OpenClawSecurity
@@ -86,7 +86,7 @@ Read the current OpenClaw config:
 
   cat ~/.openclaw/openclaw.json
 
-Add the ClawShield plugin to the `plugins.entries` section. You need to use
+Add the DefenseClaw plugin to the `plugins.entries` section. You need to use
 the FULL ABSOLUTE PATHS to where you cloned the repo. For example, if you
 cloned to /home/user/OpenClawSecurity, the config would be:
 
@@ -163,7 +163,7 @@ Send a test message through OpenClaw and check the audit log:
 You should see scan entries appearing. The "decision" field will be "allow"
 for clean messages.
 
-That's it! ClawShield is now scanning every message in and out of your agent.
+That's it! DefenseClaw is now scanning every message in and out of your agent.
 
 Give me a summary of what was installed, any issues encountered, and confirm
 the final status of OpenClaw.
@@ -173,7 +173,7 @@ the final status of OpenClaw.
 
 ## What This Does
 
-Once installed, ClawShield sits between the outside world and your agent:
+Once installed, DefenseClaw sits between the outside world and your agent:
 
 - **Inbound messages** are scanned before your agent sees them
 - **Outbound responses** are scanned before they're sent
@@ -201,7 +201,7 @@ The most common cause is invalid JSON in `openclaw.json`. Open it in a JSON vali
 Make sure the binary path in `openclaw.json` points to the actual `clawshield-scan` binary. Run it directly to test: `echo '{"content":"test"}' | /full/path/to/bin/clawshield-scan --policy /full/path/to/config/production.yaml`
 
 **False positives:**
-If ClawShield is blocking legitimate messages, you can switch to dev mode first (`config/dev_default.yaml`) which logs but doesn't block. Review the audit log to tune your policy, then switch back to production.
+If DefenseClaw is blocking legitimate messages, you can switch to dev mode first (`config/dev_default.yaml`) which logs but doesn't block. Review the audit log to tune your policy, then switch back to production.
 
 ## The Code
 
